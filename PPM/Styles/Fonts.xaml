@@ -1,0 +1,51 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <FontFamily x:Key="Mono">/Fonts/#Ubuntu Mono</FontFamily>
+    <FontFamily x:Key="MonoBold">/Fonts/#Ubuntu Mono Bold</FontFamily>
+    <FontFamily x:Key="FontAwesomeSolid">/Fonts/#Font Awesome 6 Free Solid</FontFamily>
+    <FontFamily x:Key="FontAwesomeRegular">/Fonts/#Font Awesome 6 Free Regular</FontFamily>
+
+    <Style TargetType="{x:Type Control}" x:Key="BaseStyle">
+        <Setter Property="FontFamily" Value="{StaticResource Mono}"/>
+    </Style>
+
+    <Style TargetType="{x:Type TextBlock}" x:Key="BaseTextBlockStyle">
+        <Setter Property="FontFamily" Value="{StaticResource Mono}"/>
+    </Style>
+
+    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource BaseTextBlockStyle}"/>
+    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource BaseStyle}"/>
+    <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource BaseStyle}"/>
+
+    <system:String x:Key="FAWindowMinimize">&#xf2d1;</system:String>
+    <system:String x:Key="FAWindowMaximize">&#xf2d0;</system:String>
+    <system:String x:Key="FAWindowSquare">&#xf0c8;</system:String>
+    <system:String x:Key="FAWindowRestore">&#xf2d2;</system:String>
+    <system:String x:Key="FAWindowClose">&#xf410;</system:String>
+
+    <system:String x:Key="FAFileCode">&#xf1c9;</system:String>
+    <system:String x:Key="FACog">&#xf013;</system:String>
+    <system:String x:Key="FABars">&#xf0c9;</system:String>
+    <system:String x:Key="FAAngleUp">&#xf106;</system:String>
+    <system:String x:Key="FAAngleRight">&#xf105;</system:String>
+    <system:String x:Key="FABiohazard">&#xf780;</system:String>
+    <system:String x:Key="FAStepBackward">&#xf048;</system:String>
+    <system:String x:Key="FAStepForward">&#xf051;</system:String>
+    <system:String x:Key="FAPlay">&#xf04b;</system:String>
+    <system:String x:Key="FAPause">&#xf04c;</system:String>
+    <system:String x:Key="FAVolume">&#xf026;</system:String>
+    <system:String x:Key="FAMute">&#xf6a9;</system:String>
+    <system:String x:Key="FASearch">&#xf002;</system:String>
+    <system:String x:Key="FACompress">&#xf066;</system:String>
+    <system:String x:Key="FAMaximize">&#xf31e;</system:String>
+    <system:String x:Key="FASaveIcon">&#xf0c7;</system:String>
+    <system:String x:Key="FASpinner">&#xf1ce;</system:String>
+    <system:String x:Key="FAFilter">&#xf0b0;</system:String>
+    <system:String x:Key="FASettings">&#xf1de;</system:String>
+    <system:String x:Key="FAExport">&#xf56e;</system:String>
+    <system:String x:Key="FAImport">&#xf56f;</system:String>
+    <system:String x:Key="FAPaperPlane">&#xf1d8;</system:String>
+
+
+</ResourceDictionary>

@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="PPM.PowerPlanPopUp"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PPM"
+             mc:Ignorable="d"
+             
+             d:DataContext="{d:DesignInstance local:PowerPlanPopUpDesignModel, IsDesignTimeCreatable=True}"
+             >
+    <UserControl.DataContext>
+        <local:PowerPlanPopUpViewModel/>
+    </UserControl.DataContext>
+    <Border>
+        <Grid Height="Auto" Width="Auto" VerticalAlignment="Center">
+            <Border Name="Mask" Background="#FF1F1F1F" CornerRadius="10" />
+
+            <VirtualizingStackPanel>
+
+                <VirtualizingStackPanel.OpacityMask>
+                    <VisualBrush Visual="{Binding ElementName=Mask}"/>
+                </VirtualizingStackPanel.OpacityMask>
+
+                <ItemsControl ItemsSource="{Binding PowerPlanItems}" ClipToBounds="True">
+                    <ItemsControl.OpacityMask>
+                        <VisualBrush Visual="{Binding ElementName=Mask}"/>
+                    </ItemsControl.OpacityMask>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <local:PowerPlanItemControl/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                <Border BorderBrush="#FF2E2E2E" BorderThickness="1"/>
+                <Button Content="Settings" Command="{Binding OpenSettingsWindowCommand}" Tag="{StaticResource FACog}" Style="{StaticResource IconButton}" Height="35"/>
+                <Button Content="Exit" Command="{Binding CloseApplicationCommand}" Tag="{StaticResource FAWindowClose}" Style="{StaticResource IconButton}" Height="35"/>
+            </VirtualizingStackPanel>
+
+
+        </Grid>
+    </Border>
+
+</UserControl>

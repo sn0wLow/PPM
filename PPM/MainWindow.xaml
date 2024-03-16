@@ -1,0 +1,167 @@
+﻿<Window x:Class="PPM.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PPM"
+        mc:Ignorable="d"
+        WindowStyle="ToolWindow"
+        xmlns:tb="http://www.hardcodet.net/taskbar"
+        d:DataContext="{d:DesignInstance local:AppDesignModel, IsDesignTimeCreatable=True}"
+        Title="PPM" Background="#FF1F1F1F"  MinWidth="300" Width="400" MinHeight="200" Height="200" Foreground="LightGray" FontSize="18"
+        Closing="Window_Closing">
+    <Window.DataContext>
+        <local:AppViewModel/>
+    </Window.DataContext>
+    <Grid Name="MainGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition MinWidth="300" Width="300"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Name="MainStackPanel" Grid.Column="1">
+            <TextBlock Text="PPM"
+                       FontSize="32"
+                       FontWeight="Bold"
+                       HorizontalAlignment="Center"
+                       Foreground="LightGray"
+                       Margin="0 15 0 10">
+                <TextBlock.Effect>
+                    <DropShadowEffect Color="Black" Opacity="0.5"/>
+                </TextBlock.Effect>
+            </TextBlock>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 20">
+                <TextBlock Text="Start with Windows" Margin="0 0 10 0"/>
+                <ToggleButton x:Name="Toggle2" FontSize="14" Height="20" Width="60" Cursor="Hand" 
+                              Command="{Binding ToggleAddAutoStart}" CommandParameter="{Binding Path=IsChecked, RelativeSource={RelativeSource Self}}"
+                              IsChecked="{Binding StartWithWindows}">
+                    <ToggleButton.Template>
+                        <ControlTemplate TargetType="ToggleButton">
+                            <Border x:Name="BorderBackground" Background="OrangeRed" CornerRadius="3">
+                                <Border.Triggers>
+                                    <EventTrigger RoutedEvent="Border.MouseEnter">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <ColorAnimation To="White" 
+                                    Storyboard.TargetName="BorderDisabled" 
+                                    Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)" 
+                                    FillBehavior="HoldEnd" 
+                                    Duration="0:0:0.35"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                    <EventTrigger RoutedEvent="Border.MouseLeave">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <ColorAnimation To="LightGray" 
+                                    Storyboard.TargetName="BorderDisabled"
+                                    Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
+                                    FillBehavior="HoldEnd" 
+                                    Duration="0:0:0.35"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                    <EventTrigger RoutedEvent="Border.MouseEnter">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <ColorAnimation To="White" 
+                                    Storyboard.TargetName="BorderEnabled" 
+                                    Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)" 
+                                    FillBehavior="HoldEnd" 
+                                    Duration="0:0:0.35"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                    <EventTrigger RoutedEvent="Border.MouseLeave">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <ColorAnimation To="LightGray" 
+                                    Storyboard.TargetName="BorderEnabled"
+                                    Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
+                                    FillBehavior="HoldEnd" 
+                                    Duration="0:0:0.35"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </Border.Triggers>
+                                <Grid>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition MaxWidth="{TemplateBinding Height}"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Border x:Name="BorderDisabled" Background="LightGray" Grid.Column="0"
+                                    Margin="2.5" CornerRadius="3">
+                                            <ContentPresenter/>
+                                        </Border>
+
+                                        <TextBlock Name="tbDisabled" Text="OFF" Grid.Column="1" FontSize="{TemplateBinding FontSize}" HorizontalAlignment="Right" VerticalAlignment="Center"
+                                               Margin="0 3 5 0"
+                                               Foreground="LightGray"
+                                               FontWeight="Bold"/>
+
+                                    </Grid>
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition MaxWidth="{TemplateBinding Height}"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Name="tbEnabled" Text="ON" Grid.Column="0" FontSize="{TemplateBinding FontSize}" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                               Margin="5 3 0 0"
+                                               Foreground="LightGray"
+                                               FontWeight="Bold"/>
+
+                                        <Border x:Name="BorderEnabled" Background="LightGray" Grid.Column="1"
+                                    Margin="2.5" CornerRadius="3">
+                                            <ContentPresenter/>
+                                        </Border>
+
+                                    </Grid>
+                                </Grid>
+
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter TargetName="BorderBackground" Property="Background" Value="CornflowerBlue"/>
+                                    <Setter TargetName="BorderDisabled" Property="Visibility" Value="Hidden"/>
+                                    <Setter TargetName="tbDisabled" Property="Visibility" Value="Hidden"/>
+                                    <Setter TargetName="BorderEnabled" Property="Visibility" Value="Visible"/>
+                                    <Setter TargetName="tbEnabled" Property="Visibility" Value="Visible"/>
+                                </Trigger>
+                                <Trigger Property="IsChecked" Value="false">
+                                    <Setter TargetName="BorderBackground" Property="Background" Value="OrangeRed"/>
+                                    <Setter TargetName="BorderDisabled" Property="Visibility" Value="Visible"/>
+                                    <Setter TargetName="tbDisabled" Property="Visibility" Value="Visible"/>
+                                    <Setter TargetName="BorderEnabled" Property="Visibility" Value="Hidden"/>
+                                    <Setter TargetName="tbEnabled" Property="Visibility" Value="Hidden"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </ToggleButton.Template>
+                </ToggleButton>
+            </StackPanel>
+            
+        </StackPanel>
+
+        <tb:TaskbarIcon 
+            Visibility="Visible"
+                IconSource="{Binding IconSource}"
+                PopupActivation="{Binding PopupActivationMode}"
+                MenuActivation="LeftOrDoubleClick"
+                d:DataContext="{d:DesignInstance local:TaskBarIconViewModel, IsDesignTimeCreatable=False}" 
+                >
+            <tb:TaskbarIcon.TrayPopup >
+                <!-- the popup, here a custom user control, will also get the DataContext of the NotifyIcon -->
+                <local:PowerPlanPopUp />
+            </tb:TaskbarIcon.TrayPopup>
+            <tb:TaskbarIcon.DataContext>
+                <local:TaskBarIconViewModel/>
+            </tb:TaskbarIcon.DataContext>
+        </tb:TaskbarIcon>
+    </Grid>
+</Window>
